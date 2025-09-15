@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Un Mensaje Especial</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <title>Para mi princesa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-primary: #7a1f3d; /* Burdeos oscuro */
-      --color-secondary: #4b2e2e; /* Grisáceo oscuro */
-      --color-background: #fcf9f6; /* Blanco roto */
-      --card-bg-color: rgba(255, 255, 255, 0.9); /* Más opaco */
-      --box-shadow-color: rgba(0, 0, 0, 0.12);
+      --color-primary: #e07a5f;
+      --color-secondary: #3d405b;
+      --color-background: linear-gradient(135deg, #fff5e6, #ffe0f0, #ffd166);
       --font-title: 'Dancing Script', cursive;
       --font-body: 'Montserrat', sans-serif;
+      --font-alt: 'Playfair Display', serif;
     }
+
     body {
       font-family: var(--font-body);
       margin: 0;
       padding: 0;
-      background-color: var(--color-background);
+      background: var(--color-background);
       color: var(--color-secondary);
       display: flex;
       flex-direction: column;
@@ -30,594 +30,259 @@
       overflow: hidden;
       position: relative;
     }
+
     .container {
       width: 90%;
       max-width: 600px;
-      background-color: var(--card-bg-color);
-      padding: 2.5em;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px var(--box-shadow-color);
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 2em;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
       position: relative;
+      z-index: 10;
       animation: fadeIn 1.5s ease-out;
-      min-height: 400px;
+      min-height: 380px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      z-index: 10;
+      justify-content: center;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.9); }
       to { opacity: 1; transform: scale(1); }
     }
-    h1, h2 {
+
+    h1 {
       font-family: var(--font-title);
       font-weight: 700;
+      font-size: 3em;
       color: var(--color-primary);
-      margin-bottom: 0.2em;
+      margin-bottom: 0.4em;
     }
-    h1 { font-size: 3.5em; }
-    h2 { font-size: 2.2em; }
-    #main-title.heartbeat {
-      animation: heartbeat 1.5s infinite;
+
+    .section {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
     }
-    @keyframes heartbeat {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-    .content-section {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+
+    .section.active {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 2.5em;
-      box-sizing: border-box;
       opacity: 1;
       transform: translateY(0);
-      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-      pointer-events: all;
     }
-    .hidden {
-      opacity: 0;
-      transform: translateY(20px);
-      pointer-events: none;
-      display: none;
+
+    .message-box {
+      font-size: 1.15em;
+      line-height: 1.7;
+      margin: 1.5em 0;
+      min-height: 150px;
+      text-align: left;
+      font-family: var(--font-alt);
     }
-    .message {
-      font-size: 1.2em;
-      line-height: 1.6;
-      margin: 1em 0 2em;
-      font-weight: 300;
-      max-width: 80%;
+
+    input {
+      width: 80%;
+      padding: 0.8em;
+      margin: 1.2em 0;
+      border-radius: 25px;
+      border: 1px solid #ddd;
+      text-align: center;
+      font-family: var(--font-body);
     }
-    .small-text {
-      font-size: 0.9em;
-      margin-top: -1.5em;
-      color: var(--color-secondary);
-      opacity: 0.8;
-      font-style: italic;
-    }
+
     .nav-button {
       font-size: 1em;
       padding: 0.8em 1.5em;
       border: none;
       border-radius: 25px;
-      background-color: var(--color-primary);
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       color: white;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      font-family: var(--font-body);
     }
-    .nav-button:hover:not(:disabled) {
+
+    .nav-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-      background-color: #a33f5d;
+      background: linear-gradient(135deg, #fad0c4, #ff9a9e);
     }
-    .unmute-button {
-      background: none;
-      border: 1px solid var(--color-primary);
-      color: var(--color-primary);
-      margin-top: 15px;
-      padding: 10px 20px;
-      font-size: 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      font-family: var(--font-body);
-      z-index: 20;
-    }
-    .unmute-button:hover {
-      background-color: rgba(122, 31, 61, 0.1);
-      transform: scale(1.05);
-    }
-    .riddle-section { text-align: center; }
-    .hint {
-      font-style: italic;
-      color: var(--color-secondary);
-      opacity: 0.7;
-      margin-top: 1em;
-    }
-    #secondary-hint-btn {
-        display: none;
-        margin-top: 15px;
-        background-color: transparent;
-        border: 1px solid var(--color-secondary);
-        color: var(--color-secondary);
-        font-size: 0.9em;
-        padding: 8px 15px;
-        border-radius: 20px;
-        transition: all 0.3s ease;
-    }
-    #secondary-hint-btn:hover {
-        background-color: rgba(75, 46, 46, 0.1);
-        transform: scale(1.03);
-    }
-    input {
-      width: 80%;
-      padding: 0.8em;
-      margin: 1.5em 0 1em 0;
-      border-radius: 25px;
-      border: 1px solid #ddd;
-      text-align: center;
-      font-family: var(--font-body);
-      transition: border-color 0.3s ease;
-    }
-    input:focus {
-      outline: none;
-      border-color: var(--color-primary);
-    }
-    #result {
+
+    #message {
       margin-top: 1em;
       font-size: 1.1em;
+      min-height: 1.5em;
       font-weight: 500;
-      color: var(--color-primary);
     }
+
     .petal {
       position: absolute;
-      width: 15px;
-      height: 15px;
-      background-color: rgba(255, 182, 193, 0.7);
-      border-radius: 50%;
+      border-radius: 70% 30% 50% 50%;
       animation: fall linear infinite;
       z-index: 1;
       pointer-events: none;
     }
+
     @keyframes fall {
-      to { transform: translateY(100vh); }
-    }
-    .petal-small {
-      width: 10px;
-      height: 10px;
-      background-color: rgba(255, 182, 193, 0.5);
-    }
-    .petal-big {
-      width: 20px;
-      height: 20px;
-      background-color: rgba(255, 182, 193, 0.9);
-    }
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: #f06;
-      animation: confetti-fall 2s ease-out forwards;
-      opacity: 0;
-      border-radius: 2px;
-      z-index: 100;
-    }
-    @keyframes confetti-fall {
-      0% { transform: translateY(-100px) rotateZ(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotateZ(720deg); opacity: 0; }
-    }
-    #game-section {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    #game-stats {
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
-        margin-bottom: 20px;
-        font-size: 1.2em;
-        font-weight: 500;
-        color: var(--color-primary);
-    }
-    #game-area {
-        position: relative;
-        width: 100%;
-        height: 300px;
-        border: 2px dashed var(--color-secondary);
-        border-radius: 15px;
-        overflow: hidden;
-    }
-    .flower {
-        position: absolute;
-        font-size: 2em;
-        cursor: pointer;
-        transition: transform 0.2s ease-in-out;
-    }
-    .flower:hover {
-        transform: scale(1.2);
-    }
-    #game-result {
-        margin-top: 20px;
-        font-size: 1.2em;
-        font-weight: 500;
-        min-height: 1.5em;
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* Estilos para el efecto de máquina de escribir */
-    .typing-text {
-      overflow: hidden; /* Oculta el texto que no se ha "escrito" */
-      white-space: pre-wrap; /* Mantiene saltos de línea y espacios */
-      width: 0; /* Ancho inicial 0 */
-      animation: typing 0.05s steps(1, end) forwards; /* La animación se activa por JS */
-    }
-    .typing-cursor {
-      border-right: 2px solid var(--color-primary); /* Cursor parpadeante */
-      animation: blink-caret 0.75s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% } /* Revela el texto */
-    }
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: var(--color-primary) }
+    .unmute-container {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--color-primary);
+      border-radius: 30px;
+      padding: 8px 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      z-index: 20;
     }
 
-    /* Estilos para las partículas de fondo */
-    .particle {
-      position: absolute;
-      background-color: rgba(255, 200, 220, 0.6); /* Un rosa claro y sutil */
-      border-radius: 50%;
-      pointer-events: none;
-      animation: floatAndFade 15s infinite ease-in-out;
-      z-index: 1; /* Detrás del contenido principal */
+    .unmute-button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--color-primary);
+      margin-right: 10px;
     }
-    @keyframes floatAndFade {
-      0% { transform: translateY(0) translateX(0) scale(0); opacity: 0; }
-      25% { transform: translateY(-20vh) translateX(10vw) scale(1); opacity: 0.7; }
-      50% { transform: translateY(-40vh) translateX(-10vw) scale(1); opacity: 0.5; }
-      75% { transform: translateY(-60vh) translateX(5vw) scale(0.5); opacity: 0.3; }
-      100% { transform: translateY(-80vh) translateX(0) scale(0); opacity: 0; }
+
+    .unmute-message {
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 2.2em; }
+      .message-box { font-size: 1em; }
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="content-section" id="initial-card">
-    <h1 id="main-title">Para Cindy</h1>
-    <p class="message">
-      En el silencio de este rincón digital, he guardado un mensaje que solo tú puedes descifrar. Es un susurro, un gesto de aprecio, una pequeña pausa para recordarte la admiración que siento por ti.
-    </p>
-    <p class="small-text">
-        (No olvides activar el sonido para una experiencia completa)
-    </p>
-    <p style="font-style: italic; font-size: 1em;">Con la más sincera de las admiraciones,<br><strong>Jaime</strong></p>
-    <button class="nav-button" id="start-btn">Si estás lista, por favor continúa</button>
+  <div id="access-section" class="section active">
+    <h1>Una cita especial</h1>
+    <p>Para entrar a este jardín de sorpresas, necesitas la clave que ya conoces.</p>
+    <input type="text" id="code-input" placeholder="Ingresa el código...">
+    <div id="message"></div>
+    <button class="nav-button" onclick="verifyCode()">Confirmar</button>
   </div>
 
-  <div class="content-section hidden" id="riddle-section">
-    <h2>El Acertijo Más Difícil del Mundo</h2>
-    <p class="message">
-      Es el tiempo de las flores y los nuevos comienzos.<br>
-      Es la fecha en que la música se viste de un amor sin final.<br>
-      Lo celebran los enamorados, y lo recuerda mi alma.
-    </p>
-    <p class="hint" id="first-hint">
-      <em>Pista: Lo que me atrajo de ti, no fue la estación, sino el día.</em>
-    </p>
-    <button class="nav-button" id="secondary-hint-btn">Necesito otra pista</button>
-    <input type="text" id="answer" placeholder="Escribe tu respuesta aquí...">
-    <div id="result"></div>
-    <div style="display: flex; justify-content: space-between; gap: 10px; margin-top: 20px;">
-        <button class="nav-button" id="back-btn" onclick="showSection(initialCard, riddleSection);">Volver</button>
-        <button class="nav-button" id="verify-btn">Verificar</button>
+  <div id="message-section" class="section">
+    <h1 id="page-title">Para ti</h1>
+    <div class="message-box">
+      <p id="main-message">
+        Estimada Cindy,<br><br>
+        Este mensaje ha sido creado con la intención de celebrar algo tan especial como tú. 
+        Las flores son símbolo de alegría, amor y de la luz que una persona trae a la vida de otra. 
+        Que este día sea tan luminoso y lleno de felicidad como la energía que irradias.
+      </p>
     </div>
-  </div>
-
-  <div class="content-section hidden" id="game-section">
-    <h2>Encuentra las Flores</h2>
-    <p class="message">
-        Antes de continuar, encuentra las 10 flores que aparecerán. ¡Sé rápida!
-    </p>
-    <div id="game-stats">
-        <div>Flores: <span id="flowers-found">0</span> / 10</div>
-        <div>Tiempo: <span id="timer"></span></div>
-    </div>
-    <div id="game-area"></div>
-    <div id="game-result"></div>
-    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-        <button class="nav-button" id="start-game-btn">Empezar</button>
-        <button class="nav-button hidden" id="restart-game-btn">Reintentar</button>
-    </div>
-  </div>
-  
-  <div class="content-section hidden" id="final-section">
-    <h2>Un regalo para ti</h2>
-    <p class="message"><span id="typed-message"></span><span class="typing-cursor"></span></p>
-    <button class="nav-button" onclick="location.reload()">Volver a empezar</button>
+    <button class="nav-button" id="continue-button" onclick="continueExperience()">Continuar</button>
+    <button class="nav-button" id="finalizar-button" style="display:none;" onclick="exitExperience()">Finalizar</button>
   </div>
 </div>
 
-<button class="unmute-button" id="unmute-button" style="display:none;">Activar Sonido</button>
+<div class="unmute-container" id="unmute-container" style="display:none;">
+  <button class="unmute-button" id="unmute-button">🔊</button>
+  <span class="unmute-message">Activa el sonido para una mejor experiencia</span>
+</div>
 
 <audio id="backgroundAudio" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
   Tu navegador no soporta el elemento de audio.
 </audio>
 
 <script>
+  const SECRET_CODE = "8097";
+  const accessSection = document.getElementById('access-section');
+  const messageSection = document.getElementById('message-section');
   const backgroundAudio = document.getElementById('backgroundAudio');
-  const startBtn = document.getElementById('start-btn');
-  const verifyBtn = document.getElementById('verify-btn');
-  const answerInput = document.getElementById('answer');
-  const resultDiv = document.getElementById('result');
-  const initialCard = document.getElementById('initial-card');
-  const riddleSection = document.getElementById('riddle-section');
-  const gameSection = document.getElementById('game-section');
-  const finalSection = document.getElementById('final-section');
+  const unmuteContainer = document.getElementById('unmute-container');
   const unmuteButton = document.getElementById('unmute-button');
-  const mainTitle = document.getElementById('main-title');
-  const secondaryHintBtn = document.getElementById('secondary-hint-btn');
-  const firstHint = document.getElementById('first-hint');
-  const startGameBtn = document.getElementById('start-game-btn');
-  const restartGameBtn = document.getElementById('restart-game-btn');
-  const flowersFoundSpan = document.getElementById('flowers-found');
-  const timerSpan = document.getElementById('timer');
-  const gameArea = document.getElementById('game-area');
-  const gameResultDiv = document.getElementById('game-result');
-  const typedMessageSpan = document.getElementById('typed-message');
+  const mainMessage = document.getElementById('main-message');
+  const continueButton = document.getElementById('continue-button');
+  const finalizarButton = document.getElementById('finalizar-button');
 
-  let audioPlayed = false;
-  let hintTimeout;
-  
-  let flowersToFind = 10;
-  let flowersFound = 0;
-  let gameTime = 15;
-  let gameTimer;
-  let isGameActive = false;
+  // Verificar código
+  function verifyCode() {
+    const inputCode = document.getElementById('code-input').value;
+    const messageDiv = document.getElementById('message');
 
-  const finalMessageContent = `El cariño no se celebra solo una vez, se vive cada día. Pero hay momentos que merecen un detalle especial para ser atesorados por siempre.
-      <br><br>
-      El **21 de septiembre** recibirás un pequeño gesto que, espero, ilumine tu día tanto como tú iluminas el mío.`;
-
-
-  function playAudio() {
-    if (!audioPlayed) {
-      backgroundAudio.volume = 0.4;
-      const playPromise = backgroundAudio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          unmuteButton.style.display = 'block';
-        });
-      }
-      audioPlayed = true;
-    }
-  }
-
-  function showSection(sectionToShow, sectionToHide) {
-    sectionToHide.classList.add('hidden');
-    sectionToHide.style.pointerEvents = 'none';
-    
-    setTimeout(() => {
-      sectionToHide.style.display = 'none';
-      sectionToShow.style.display = 'flex';
-      
+    if (inputCode === SECRET_CODE) {
+      messageDiv.textContent = "¡Código correcto! Abriendo la puerta...";
+      messageDiv.style.color = "green";
       setTimeout(() => {
-        sectionToShow.classList.remove('hidden');
-        sectionToShow.style.pointerEvents = 'all';
-        if (sectionToShow === finalSection) {
-            typeWriterEffect(typedMessageSpan, finalMessageContent, 50); // Iniciar efecto de máquina de escribir
-        }
-      }, 50); 
-    }, 1000);
-  }
-
-  function startGame() {
-    isGameActive = true;
-    flowersFound = 0;
-    gameTime = 15;
-    flowersFoundSpan.textContent = flowersFound;
-    timerSpan.textContent = gameTime;
-    gameResultDiv.textContent = "";
-    gameArea.innerHTML = "";
-    startGameBtn.classList.add('hidden');
-    restartGameBtn.classList.add('hidden');
-
-    createFlower();
-
-    gameTimer = setInterval(() => {
-        gameTime--;
-        timerSpan.textContent = gameTime;
-        if (gameTime <= 0) {
-            clearInterval(gameTimer);
-            isGameActive = false;
-            gameResultDiv.textContent = "¡Se acabó el tiempo! Vuelve a intentarlo.";
-            restartGameBtn.classList.remove('hidden');
-            gameArea.innerHTML = "";
-        }
-    }, 1000);
-  }
-
-  function createFlower() {
-    if (!isGameActive || flowersFound >= flowersToFind) return;
-
-    const flower = document.createElement('span');
-    flower.classList.add('flower');
-    flower.textContent = '🌼';
-    
-    const areaRect = gameArea.getBoundingClientRect();
-    const x = Math.random() * (areaRect.width - 50);
-    const y = Math.random() * (areaRect.height - 50);
-    
-    flower.style.left = `${x}px`;
-    flower.style.top = `${y}px`;
-    
-    flower.onclick = () => {
-        if (!isGameActive) return;
-        flowersFound++;
-        flowersFoundSpan.textContent = flowersFound;
-        flower.remove();
-        if (flowersFound < flowersToFind) {
-            createFlower();
-        } else {
-            clearInterval(gameTimer);
-            gameResultDiv.textContent = "¡Increíble! ¡Lo has logrado!";
-            verifyBtn.textContent = "Continuar al regalo";
-            setTimeout(() => {
-                showSection(finalSection, gameSection);
-            }, 1500);
-        }
-    };
-    gameArea.appendChild(flower);
-  }
-
-  // Función para el efecto de máquina de escribir
-  function typeWriterEffect(element, text, delay) {
-      let i = 0;
-      element.innerHTML = ''; // Limpiar el contenido existente
-      const cursor = document.querySelector('.typing-cursor');
-      if (cursor) cursor.style.display = 'inline-block'; // Asegurar que el cursor esté visible
-
-      function type() {
-          if (i < text.length) {
-              // Manejar etiquetas HTML como <br> y <strong>
-              if (text.substring(i, i + 4) === '<br>') {
-                  element.innerHTML += '<br>';
-                  i += 4;
-              } else if (text.substring(i, i + 8) === '<strong>') {
-                  element.innerHTML += '<strong>';
-                  i += 8;
-                  let strongEnd = text.indexOf('</strong>', i);
-                  if (strongEnd !== -1) {
-                      let strongText = text.substring(i, strongEnd);
-                      element.innerHTML += strongText;
-                      i = strongEnd + 9; // Mover el índice después de </strong>
-                  }
-                  element.innerHTML += '</strong>';
-              } else {
-                  element.innerHTML += text.charAt(i);
-                  i++;
-              }
-              setTimeout(type, delay);
-          } else {
-              if (cursor) cursor.style.display = 'none'; // Ocultar el cursor al finalizar
-          }
-      }
-      type();
-  }
-
-
-  document.addEventListener('DOMContentLoaded', () => {
-    playAudio();
-    createPetals();
-    createParticles(); // Iniciar partículas de fondo
-    mainTitle.classList.add('heartbeat');
-  });
-
-  startBtn.addEventListener('click', () => {
-    mainTitle.classList.remove('heartbeat');
-    showSection(riddleSection, initialCard);
-    playAudio();
-    unmuteButton.style.display = 'none';
-    
-    hintTimeout = setTimeout(() => {
-        secondaryHintBtn.style.display = 'block';
-    }, 15000);
-  });
-
-  unmuteButton.addEventListener('click', () => {
-    backgroundAudio.play();
-    unmuteButton.style.display = 'none';
-  });
-
-  verifyBtn.addEventListener('click', () => {
-    const answer = answerInput.value.trim().toLowerCase();
-    if (answer.includes("21") && answer.includes("septiembre")) {
-      resultDiv.innerHTML = "🌹 ¡Correcto! Has sentido lo que otros solo intentan entender.";
-      playConfetti();
-      verifyBtn.textContent = "Continuar";
-      verifyBtn.onclick = () => showSection(gameSection, riddleSection);
-      document.getElementById('back-btn').style.display = 'none';
-      clearTimeout(hintTimeout);
-      secondaryHintBtn.style.display = 'none';
+        accessSection.classList.remove('active');
+        accessSection.style.display = 'none';
+        messageSection.classList.add('active');
+        createPetals();
+        playAudio(); // música arranca aquí
+      }, 1000);
     } else {
-      resultDiv.innerHTML = "No es eso... pero si cierras los ojos y escuchas con el corazón, quizás lo encuentres.";
+      messageDiv.textContent = "Lo siento, el código es incorrecto. Inténtalo de nuevo.";
+      messageDiv.style.color = "red";
     }
-  });
+  }
 
-  answerInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      verifyBtn.click();
-    }
-  });
+  // Continuar experiencia
+  function continueExperience() {
+    mainMessage.innerHTML = "Sabía que ibas a descifrar el acertijo del 21 de septiembre, con esa segunda pista te lo puse muy fácil. Pero eres, en suma, una persona muy inteligente. Es por eso que valoro este detalle más que nada, porque tú eres una persona única.<br><br>Con mucho aprecio,<br>Jaime";
+    continueButton.style.display = 'none';
+    finalizarButton.style.display = 'block';
+  }
 
-  secondaryHintBtn.addEventListener('click', () => {
-      firstHint.innerHTML = '<em>Pista más explícita: Es un día en que los girasoles se abren y la amistad se celebra con flores.</em>';
-      secondaryHintBtn.style.display = 'none';
-  });
+  // Finalizar
+  function exitExperience() {
+    window.location.reload();
+  }
 
-  startGameBtn.addEventListener('click', startGame);
-  restartGameBtn.addEventListener('click', startGame);
-
+  // Crear pétalos
   function createPetals() {
-    for (let i = 0; i < 30; i++) {
+    const colors = ["#FFD166", "#FF9AA2", "#FFFFFF", "#FAFAD2"];
+    for (let i = 0; i < 40; i++) {
       const petal = document.createElement('div');
+      const size = Math.random() * 20 + 10;
       petal.classList.add('petal');
-      petal.style.left = Math.random() * 100 + 'vw';
-      petal.style.animationDuration = Math.random() * 10 + 5 + 's';
-      petal.style.animationDelay = Math.random() * 5 + 's';
-      petal.style.opacity = Math.random() * 0.5 + 0.3;
+      petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      petal.style.width = `${size}px`;
+      petal.style.height = `${size}px`;
+      petal.style.left = `${Math.random() * 100}vw`;
+      petal.style.animationDuration = `${Math.random() * 8 + 5}s`;
+      petal.style.animationDelay = `${Math.random() * 5}s`;
+      petal.style.opacity = Math.random() * 0.6 + 0.3;
       document.body.appendChild(petal);
     }
   }
 
-  // Función para crear partículas de fondo
-  function createParticles() {
-    const numParticles = 40; // Número de partículas
-    for (let i = 0; i < numParticles; i++) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-      particle.style.width = `${Math.random() * 5 + 5}px`; // Tamaño entre 5px y 10px
-      particle.style.height = particle.style.width;
-      particle.style.left = `${Math.random() * 100}vw`;
-      particle.style.top = `${Math.random() * 100 + 100}vh`; // Empiezan por debajo de la pantalla
-      particle.style.animationDuration = `${Math.random() * 10 + 15}s`; // Duración de 15s a 25s
-      particle.style.animationDelay = `${Math.random() * 10}s`; // Retraso para que aparezcan escalonadamente
-      document.body.appendChild(particle);
-    }
-  }
-
-  function playConfetti() {
-    const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
-    const containerRect = document.querySelector('.container').getBoundingClientRect();
-
-    for (let i = 0; i < 50; i++) {
-      const confetti = document.createElement('div');
-      confetti.classList.add('confetti');
-      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      confetti.style.left = (containerRect.left + containerRect.width / 2 + (Math.random() - 0.5) * 100) + 'px';
-      confetti.style.top = (containerRect.top + containerRect.height / 2 - Math.random() * 50) + 'px';
-      confetti.style.animationDelay = (Math.random() * 0.5) + 's';
-      confetti.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
-      confetti.style.transform = `translateY(${Math.random() * -200}px) rotateZ(${Math.random() * 360}deg)`;
-      document.body.appendChild(confetti);
-      confetti.addEventListener('animationend', () => {
-        confetti.remove();
+  // Reproducir audio con control
+  function playAudio() {
+    backgroundAudio.volume = 0.5;
+    const playPromise = backgroundAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        unmuteContainer.style.display = 'flex';
       });
     }
   }
+
+  unmuteButton.addEventListener('click', () => {
+    backgroundAudio.play();
+    unmuteContainer.style.display = 'none';
+  });
+
+  document.getElementById('code-input').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') verifyCode();
+  });
 </script>
 
 </body>
