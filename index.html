@@ -24,10 +24,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start; /* antes estaba center */
       min-height: 100vh;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;  /* bloquea scroll lateral */
+      overflow-y: auto;    /* permite deslizar verticalmente */
       position: relative;
     }
 
@@ -41,7 +42,7 @@
       position: relative;
       z-index: 10;
       animation: fadeIn 1.5s ease-out;
-      min-height: 380px;
+      margin: 3em auto; /* deja espacio arriba y abajo */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -163,6 +164,7 @@
     @media (max-width: 480px) {
       h1 { font-size: 2.2em; }
       .message-box { font-size: 1em; }
+      .container { padding: 1.5em; margin: 2em auto; }
     }
   </style>
 </head>
