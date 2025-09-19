@@ -24,12 +24,40 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start; /* antes estaba center */
+      justify-content: flex-start;
       min-height: 100vh;
       text-align: center;
-      overflow-x: hidden;  /* bloquea scroll lateral */
-      overflow-y: auto;    /* permite deslizar verticalmente */
+      overflow-x: hidden;
+      overflow-y: auto;
       position: relative;
+    }
+
+    /* Fondo con nombre flotando */
+    .floating-text {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .floating-text span {
+      position: absolute;
+      font-family: var(--font-title);
+      font-size: 2.5em;
+      color: rgba(61, 64, 91, 0.05);
+      animation: floatText 20s linear infinite;
+      white-space: nowrap;
+    }
+    .floating-text .code {
+      font-size: 1.8em;
+      color: rgba(61, 64, 91, 0.02);
+    }
+    @keyframes floatText {
+      from { transform: translateY(100vh) rotate(0deg); }
+      to { transform: translateY(-120vh) rotate(360deg); }
     }
 
     .container {
@@ -42,7 +70,7 @@
       position: relative;
       z-index: 10;
       animation: fadeIn 1.5s ease-out;
-      margin: 3em auto; /* deja espacio arriba y abajo */
+      margin: 3em auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -121,54 +149,37 @@
       font-weight: 500;
     }
 
-    .petal {
-      position: absolute;
-      border-radius: 70% 30% 50% 50%;
-      animation: fall linear infinite;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    @keyframes fall {
-      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-    }
-
-    .unmute-container {
+    /* 🌻 Girasoles */
+    .sunflower {
       position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      background-color: rgba(255, 255, 255, 0.9);
-      border: 1px solid var(--color-primary);
-      border-radius: 30px;
-      padding: 8px 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      z-index: 20;
+      bottom: 0;
+      font-size: 8rem; /* más grandes */
+      transform: scale(0);
+      transform-origin: bottom center;
+      animation: grow 2s ease-out forwards;
+      z-index: 5;
     }
-
-    .unmute-button {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      color: var(--color-primary);
-      margin-right: 10px;
+    @keyframes grow {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
     }
-
-    .unmute-message {
-      font-size: 0.9em;
-    }
+    @keyframes sway1 { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+    @keyframes sway2 { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+    @keyframes sway3 { from { transform: rotate(-8deg); } to { transform: rotate(4deg); } }
+    @keyframes sway4 { from { transform: rotate(-4deg); } to { transform: rotate(8deg); } }
 
     @media (max-width: 480px) {
       h1 { font-size: 2.2em; }
       .message-box { font-size: 1em; }
       .container { padding: 1.5em; margin: 2em auto; }
+      .sunflower { font-size: 6rem; }
     }
   </style>
 </head>
 <body>
+
+<!-- Fondo flotante -->
+<div class="floating-text" id="floating-text"></div>
 
 <div class="container">
   <div id="access-section" class="section active">
@@ -183,7 +194,10 @@
     <h1 id="page-title">Para ti</h1>
     <div class="message-box">
       <p id="main-message">
-        A veces, los gestos más simples son los que mejor hablan por nosotros. No pretendo que esto sea más que eso: un detalle, una forma de decir sin decir demasiado.<br><br>Hoy 21 de septiembre, quise regalarte flores amarillas. No por seguir una tradición, sino porque me pareció justo que tú también recibieras algo bonito. Las flores amarillas tienen ese lenguaje propio: hablan de luz, de alegría, de comienzos suaves. Y pensé que merecías algo así.<br><br>No quiero que te sientas incómoda ni presionada. Solo quería que supieras que hay alguien que te piensa con ternura, con respeto, y con la ilusión tranquila de que tal vez, en algún momento, podamos compartir más que saludos breves o silencios amables.<br><br>Que estas flores te acompañen como una nota en el viento: ligera, sincera, y con buena intención. Que te hagan sonreír, aunque sea por un instante.
+        A veces, los gestos más simples son los que mejor hablan por nosotros. No pretendo que esto sea más que eso: un detalle, una forma de decir sin decir demasiado.<br><br>
+        Hoy 21 de septiembre, quise regalarte flores amarillas. No por seguir una tradición, sino porque me pareció justo que tú también recibieras algo bonito. Las flores amarillas tienen ese lenguaje propio: hablan de luz, de alegría, de comienzos suaves. Y pensé que merecías algo así.<br><br>
+        No quiero que te sientas incómoda ni presionada. Solo quería que supieras que hay alguien que te piensa con ternura, con respeto, y con la ilusión tranquila de que tal vez, en algún momento, podamos compartir más que saludos breves o silencios amables.<br><br>
+        Que estas flores te acompañen como una nota en el viento: ligera, sincera, y con buena intención. Que te hagan sonreír, aunque sea por un instante.
       </p>
     </div>
     <button class="nav-button" id="continue-button" onclick="continueExperience()">Continuar</button>
@@ -191,14 +205,8 @@
   </div>
 </div>
 
-<div class="unmute-container" id="unmute-container" style="display:none;">
-  <button class="unmute-button" id="unmute-button">🔊</button>
-  <span class="unmute-message">Activa el sonido para una mejor experiencia</span>
-</div>
-
 <audio id="backgroundAudio" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
-  Tu navegador no soporta el elemento de audio.
 </audio>
 
 <script>
@@ -206,8 +214,6 @@
   const accessSection = document.getElementById('access-section');
   const messageSection = document.getElementById('message-section');
   const backgroundAudio = document.getElementById('backgroundAudio');
-  const unmuteContainer = document.getElementById('unmute-container');
-  const unmuteButton = document.getElementById('unmute-button');
   const mainMessage = document.getElementById('main-message');
   const continueButton = document.getElementById('continue-button');
   const finalizarButton = document.getElementById('finalizar-button');
@@ -224,8 +230,8 @@
         accessSection.classList.remove('active');
         accessSection.style.display = 'none';
         messageSection.classList.add('active');
-        createPetals();
-        playAudio(); // música arranca aquí
+        createSunflowers();
+        playAudio();
       }, 1000);
     } else {
       messageDiv.textContent = "Lo siento, el código es incorrecto. Inténtalo de nuevo.";
@@ -245,39 +251,44 @@
     window.location.reload();
   }
 
-  // Crear pétalos
-  function createPetals() {
-    const colors = ["#FFD166", "#FF9AA2", "#FFFFFF", "#FAFAD2"];
-    for (let i = 0; i < 40; i++) {
-      const petal = document.createElement('div');
-      const size = Math.random() * 20 + 10;
-      petal.classList.add('petal');
-      petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      petal.style.width = `${size}px`;
-      petal.style.height = `${size}px`;
-      petal.style.left = `${Math.random() * 100}vw`;
-      petal.style.animationDuration = `${Math.random() * 8 + 5}s`;
-      petal.style.animationDelay = `${Math.random() * 5}s`;
-      petal.style.opacity = Math.random() * 0.6 + 0.3;
-      document.body.appendChild(petal);
+  // 🌻 Crear girasoles
+  function createSunflowers() {
+    const sunflowerCount = 7;
+    const animations = ["sway1","sway2","sway3","sway4"];
+    for (let i = 0; i < sunflowerCount; i++) {
+      const sunflower = document.createElement('div');
+      sunflower.textContent = "🌻";
+      sunflower.classList.add('sunflower');
+      sunflower.style.left = `${5 + i * 13}%`;
+      sunflower.style.animation = `grow 2s ease-out forwards, ${animations[i % animations.length]} ${4 + i}s ease-in-out infinite alternate`;
+      sunflower.style.animationDelay = `${i * 0.3}s`;
+      document.body.appendChild(sunflower);
     }
   }
 
-  // Reproducir audio con control
+  // Fondo flotante: Cindy + código
+  function createFloatingText() {
+    const container = document.getElementById('floating-text');
+    const words = ["Cindy","Cindy","Cindy","8097"];
+    for (let i = 0; i < 30; i++) {
+      const span = document.createElement('span');
+      const word = words[Math.random() < 0.9 ? 0 : 3];
+      span.textContent = word;
+      if (word === "8097") span.classList.add('code');
+      span.style.left = `${Math.random() * 100}vw`;
+      span.style.top = `${Math.random() * 100}vh`;
+      span.style.animationDuration = `${15 + Math.random() * 15}s`;
+      span.style.animationDelay = `${Math.random() * 20}s`;
+      container.appendChild(span);
+    }
+  }
+  createFloatingText();
+
+  // Audio
   function playAudio() {
     backgroundAudio.volume = 0.5;
-    const playPromise = backgroundAudio.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        unmuteContainer.style.display = 'flex';
-      });
-    }
+    backgroundAudio.play().catch(()=>{});
   }
-
-  unmuteButton.addEventListener('click', () => {
-    backgroundAudio.play();
-    unmuteContainer.style.display = 'none';
-  });
 
   document.getElementById('code-input').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') verifyCode();
@@ -286,3 +297,5 @@
 
 </body>
 </html>
+
+
